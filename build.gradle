@@ -1,0 +1,13 @@
+日志显示Gradle使用的是9.1.0版本（而非wrapper配置的8.6），这可能导致兼容性问题。日志被截断，看不到具体错误，但需要更新配置以兼容新版Gradle。
+
+修复root build.gradle，使用现代Gradle语法：
+// 文件: build.gradle
+plugins {
+    id 'com.android.application' version '8.4.0' apply false
+    id 'org.jetbrains.kotlin.android' version '1.9.20' apply false
+}
+
+tasks.register('clean', Delete) {
+    delete layout.buildDirectory
+}
+同时更新 app/build.gradle，确保所有配置正确：
